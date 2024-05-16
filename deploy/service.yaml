@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: self-signed-ingress-admission-controller
+spec:
+  selector:
+    app: self-signed-ingress-admission-controller
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 8443

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: self-signed-ingress-admission-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: self-signed-ingress-admission-controller
+  template:
+    metadata:
+      labels:
+        app: self-signed-ingress-admission-controller
+    spec:
+      containers:
+      - name: self-signed-ingress-admission-controller
+        image: dpluser/self-signed-ingress-admission-controller:1.0.3-beta
+        ports:
+        - containerPort: 8443
+        env:
+        - name: TLS_KEY
+          value: "/app/tls.key"
+        - name: TLS_CRT
+          value: "/app/tls.crt"
+        volumeMounts:
+          - mountPath: /app/tls.key
+            name: tls-key
+            subPath: tls.key
+          - mountPath: /app/tls.crt
+            name: tls-crt
+            subPath: tls.crt
+      volumes:
+        - name: tls-key
+          secret:
+            secretName: self-signed-ingress-admission-controller-tls
+            defaultMode: 420
+            items:
+            - key: tls.key
+              path: tls.key
+        - name: tls-crt
+          secret:
+            secretName: self-signed-ingress-admission-controller-tls
+            defaultMode: 420
+            items:
+            - key: tls.crt
+              path: tls.crt
