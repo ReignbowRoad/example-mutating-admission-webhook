@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: self-signed-ingress-admission-controller
+  name: example-mutating-webhook
 spec:
   selector:
-    app: self-signed-ingress-admission-controller
+    app: example-mutating-webhook
   ports:
     - protocol: TCP
       port: 443

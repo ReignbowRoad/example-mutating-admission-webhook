@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: self-signed-ingress-admission-controller
+  name: example-mutating-webhook
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: self-signed-ingress-admission-controller
+      app: example-mutating-webhook
   template:
     metadata:
       labels:
-        app: self-signed-ingress-admission-controller
+        app: example-mutating-webhook
     spec:
       containers:
-      - name: self-signed-ingress-admission-controller
-        image: dpluser/self-signed-ingress-admission-controller:1.0.3-beta
+      - name: example-mutating-webhook
+        image: dpluser/example-mutating-webhook:1.0.3-beta
         ports:
         - containerPort: 8443
         env:
@@ -32,14 +32,14 @@ spec:
       volumes:
         - name: tls-key
           secret:
-            secretName: self-signed-ingress-admission-controller-tls
+            secretName: example-mutating-webhook-tls
             defaultMode: 420
             items:
             - key: tls.key
               path: tls.key
         - name: tls-crt
           secret:
-            secretName: self-signed-ingress-admission-controller-tls
+            secretName: example-mutating-webhook-tls
             defaultMode: 420
             items:
             - key: tls.crt

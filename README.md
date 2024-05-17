@@ -7,13 +7,13 @@ An example (rough and ready) Mutatiing Webhook written in Python. Does nothing f
 Build with Docker:
 
 ```shell
-$ docker build -t dpluser/self-signed-ingress-admission-controller:1.0.2-beta .
+$ docker build -t dpluser/example-mutating-webhook:1.0.2-beta .
 ```
 
 Push the image:
 
 ```shell
-docker push dpluser/self-signed-ingress-admission-controller:1.0.3-beta 
+docker push dpluser/example-mutating-webhook:1.0.3-beta 
 ```
 
 ## Generating Certifcates
@@ -27,7 +27,7 @@ $ ./generate-demo-certs.sh --host <hostname> --password <ca-password>
 Then create a secret in Kubernetes that can be used by both your application and the Webhook configuration (Root CA cert only)
 
 ```shell
-$ kubectl create secret generic self-signed-ingress-admission-controller-tls \
+$ kubectl create secret generic example-mutating-webhook-tls \
     --from-file=rootCA.crt=rootCA.crt \
     --from-file=tls.crt=tls.crt \
     --from-file=tls.key=tls.key
@@ -55,7 +55,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: nginx-example
+  ingressClassName: nginx
   rules:
   - http:
       paths:
