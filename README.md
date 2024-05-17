@@ -7,13 +7,13 @@ An example (rough and ready) Mutatiing Webhook written in Python. Does nothing f
 Build with Docker:
 
 ```shell
-$ docker build -t dpluser/example-mutating-webhook:1.0.2-beta .
+$ docker build -t dpluser/example-mutating-webhook:1.0.0-beta .
 ```
 
 Push the image:
 
 ```shell
-docker push dpluser/example-mutating-webhook:1.0.3-beta 
+docker push dpluser/example-mutating-webhook:1.0.0-beta 
 ```
 
 ## Generating Certifcates
